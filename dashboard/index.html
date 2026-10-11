@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkInSync | Multi-Country Capacity Planner & Facilities KPI Suite</title>
+<style>
+  :root {
+    --bg-main: #0b1329;
+    --card-bg: #131f37;
+    --border-color: #233554;
+    --accent-blue: #0ea5e9;
+    --accent-teal: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-purple: #a855f7;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { background-color: var(--bg-main); color: var(--text-primary); padding: 24px; }
+  .container { max-width: 1240px; margin: 0 auto; }
+
+  header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 24px; }
+  .logo-title h1 { font-size: 20px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .logo-title span { color: var(--accent-blue); }
+  .badge { background: rgba(14, 165, 233, 0.15); border: 1px solid var(--accent-blue); color: #bae6fd; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 8px; text-align: center; }
+  .stat-val { font-size: 26px; font-weight: 800; color: var(--accent-blue); }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin-top: 4px; font-weight: 600; }
+  .stat-sub { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+  .main-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
+  .panel { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; }
+  .panel h2 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+  .slider { width: 100%; height: 6px; border-radius: 3px; background: #233554; outline: none; -webkit-appearance: none; }
+  .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-blue); cursor: pointer; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+  th { text-align: left; padding: 8px 10px; background: #0a1122; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+  td { padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  .tag { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block; }
+  .tag-green { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+  .tag-blue { background: rgba(14, 165, 233, 0.2); color: #7dd3fc; }
+  .tag-amber { background: rgba(245, 158, 11, 0.2); color: #fde68a; }
+
+  .bounds-bar-container { margin: 16px 0; background: #0c1527; padding: 14px; border-radius: 6px; border: 1px solid var(--border-color); }
+  .bounds-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .bounds-row { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.08); }
+  .bounds-row:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo-title">
+      <h1>WorkInSync <span>Workplace Capacity & Facilities KPI Suite</span></h1>
+    </div>
+    <div>
+      <span class="badge">Technical Account Manager Candidate &bull; Ankur Choudhary</span>
+    </div>
+  </header>
+
+  <!-- Metric Headline Cards -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-val" id="disp-min-seats">1,200</div>
+      <div class="stat-label">Theoretical Minimum</div>
+      <div class="stat-sub">Perfect 5-day uniform cohorting (1.67:1)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="disp-opt-seats" style="color: var(--accent-teal);">1,380</div>
+      <div class="stat-label">Recommended Optimal</div>
+      <div class="stat-sub">WorkInSync Managed + 15% Buffer (1.45:1)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="disp-max-seats" style="color: var(--accent-amber);">2,000</div>
+      <div class="stat-label">Theoretical Maximum</div>
+      <div class="stat-sub">1:1 Dedicated Desks (Zero Sharing)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="disp-savings" style="color: var(--accent-teal);">$3.25M</div>
+      <div class="stat-label">Annual OPEX Savings</div>
+      <div class="stat-sub">Real estate cost reduction vs 1:1 baseline</div>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Left Panel: Interactive Simulation Controls -->
+    <div class="panel">
+      <h2>Capacity Sizing Parameters <span class="tag tag-blue">Real-Time Simulator</span></h2>
+      
+      <div class="form-group">
+        <label>
+          <span>Total Enterprise Headcount</span>
+          <span id="lbl-headcount" style="color: var(--accent-blue);">2,000 Employees</span>
+        </label>
+        <input type="range" min="500" max="5000" step="100" value="2000" class="slider" id="inp-headcount" oninput="recalc()">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <span>Mandatory In-Office Days per Week</span>
+          <span id="lbl-days" style="color: var(--accent-blue);">3 Days / Week</span>
+        </label>
+        <input type="range" min="1" max="5" step="1" value="3" class="slider" id="inp-days" oninput="recalc()">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <span>WorkInSync Dynamic Buffer</span>
+          <span id="lbl-buffer" style="color: var(--accent-teal);">15% Safety Contingency</span>
+        </label>
+        <input type="range" min="0" max="30" step="5" value="15" class="slider" id="inp-buffer" oninput="recalc()">
+      </div>
+
+      <div class="bounds-bar-container">
+        <div class="bounds-title">Capacity Sizing Range Summary</div>
+        <div class="bounds-row">
+          <span>Weekly Desk-Days Required:</span>
+          <strong id="row-demand">6,000 person-days</strong>
+        </div>
+        <div class="bounds-row">
+          <span>Theoretical Floor (Uniform 5-day):</span>
+          <strong id="row-min">1,200 seats (60.0%)</strong>
+        </div>
+        <div class="bounds-row">
+          <span>Recommended WorkInSync Sizing:</span>
+          <strong id="row-opt" style="color: var(--accent-teal);">1,380 seats (69.0%)</strong>
+        </div>
+        <div class="bounds-row">
+          <span>Unmanaged Organic Peak (TWaT 85%):</span>
+          <strong id="row-peak" style="color: var(--accent-amber);">1,700 seats (85.0%)</strong>
+        </div>
+        <div class="bounds-row">
+          <span>Theoretical Ceiling (1:1 Dedicated):</span>
+          <strong id="row-max">2,000 seats (100.0%)</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Multi-Country Breakdown & KPI Scorecard -->
+    <div class="panel">
+      <h2>3-Country Office Allocation & Facilities KPIs <span class="tag tag-green">Enterprise Health: A+</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Office / Country</th>
+            <th>Headcount</th>
+            <th>Min Seats</th>
+            <th>Optimal</th>
+            <th>Peak (85%)</th>
+            <th>Annual Savings</th>
+          </tr>
+        </thead>
+        <tbody id="tbl-offices">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+
+      <h2 style="margin-top: 20px;">Strategic Facilities Management KPIs</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pillar</th>
+            <th>KPI Indicator</th>
+            <th>Benchmark Target</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Space Utilization</strong></td>
+            <td>Peak Seat Occupancy</td>
+            <td>75% – 85%</td>
+            <td><span class="tag tag-green">Optimal (81.4%)</span></td>
+          </tr>
+          <tr>
+            <td><strong>Space Optimization</strong></td>
+            <td>Ghost Desk Rate (Booked/No-show)</td>
+            <td>≤ 5.0%</td>
+            <td><span class="tag tag-green">Healthy (3.6%)</span></td>
+          </tr>
+          <tr>
+            <td><strong>Employee Experience</strong></td>
+            <td>Booking Denial (Bump) Rate</td>
+            <td>≤ 2.0%</td>
+            <td><span class="tag tag-green">Low Friction (1.1%)</span></td>
+          </tr>
+          <tr>
+            <td><strong>Adoption & Compliance</strong></td>
+            <td>QR/Badge Check-In Compliance</td>
+            <td>≥ 92.0%</td>
+            <td><span class="tag tag-green">Compliant (95.2%)</span></td>
+          </tr>
+          <tr>
+            <td><strong>Operational Recovery</strong></td>
+            <td>Reverse Ghosting Auto-Release</td>
+            <td>≥ 80.0%</td>
+            <td><span class="tag tag-green">Recovered (86.5%)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  function recalc() {
+    const headcount = parseInt(document.getElementById('inp-headcount').value);
+    const days = parseInt(document.getElementById('inp-days').value);
+    const bufferPct = parseInt(document.getElementById('inp-buffer').value) / 100.0;
+
+    document.getElementById('lbl-headcount').innerText = `${headcount.toLocaleString()} Employees`;
+    document.getElementById('lbl-days').innerText = `${days} Days / Week`;
+    document.getElementById('lbl-buffer').innerText = `${Math.round(bufferPct * 100)}% Safety Contingency`;
+
+    const totalPersonDays = headcount * days;
+    const minSeats = Math.round(totalPersonDays / 5);
+    const optSeats = Math.round(minSeats * (1 + bufferPct));
+    const peakSeats = Math.round(headcount * 0.85);
+    const maxSeats = headcount;
+
+    document.getElementById('disp-min-seats').innerText = minSeats.toLocaleString();
+    document.getElementById('disp-opt-seats').innerText = optSeats.toLocaleString();
+    document.getElementById('disp-max-seats').innerText = maxSeats.toLocaleString();
+
+    // Blended cost assumptions: $5,240/seat/year
+    const blendedCost = 5240;
+    const annualSavings = (maxSeats - optSeats) * blendedCost;
+    document.getElementById('disp-savings').innerText = `$${(annualSavings / 1e6).toFixed(2)}M`;
+
+    document.getElementById('row-demand').innerText = `${totalPersonDays.toLocaleString()} person-days`;
+    document.getElementById('row-min').innerText = `${minSeats.toLocaleString()} seats (${((minSeats/headcount)*100).toFixed(1)}%)`;
+    document.getElementById('row-opt').innerText = `${optSeats.toLocaleString()} seats (${((optSeats/headcount)*100).toFixed(1)}%)`;
+    document.getElementById('row-peak').innerText = `${peakSeats.toLocaleString()} seats (${((peakSeats/headcount)*100).toFixed(1)}%)`;
+    document.getElementById('row-max').innerText = `${maxSeats.toLocaleString()} seats (100.0%)`;
+
+    // 3 Office Split (50% Bangalore, 30% New York, 20% London)
+    const offices = [
+      { country: "India", city: "Bangalore", share: 0.50, cost: 2500 },
+      { country: "USA", city: "New York", share: 0.30, cost: 8500 },
+      { country: "UK", city: "London", share: 0.20, cost: 7200 }
+    ];
+
+    let html = "";
+    offices.forEach(o => {
+      const oHead = Math.round(headcount * o.share);
+      const oMin = Math.round((oHead * days) / 5);
+      const oOpt = Math.round(oMin * (1 + bufferPct));
+      const oPeak = Math.round(oHead * 0.85);
+      const oSav = (oHead - oOpt) * o.cost;
+      html += `<tr>
+        <td><strong>${o.country}</strong> (${o.city})</td>
+        <td>${oHead.toLocaleString()}</td>
+        <td>${oMin.toLocaleString()}</td>
+        <td style="color: var(--accent-teal); font-weight:700;">${oOpt.toLocaleString()}</td>
+        <td>${oPeak.toLocaleString()}</td>
+        <td style="color: var(--accent-teal);">$${oSav.toLocaleString()}</td>
+      </tr>`;
+    });
+    document.getElementById('tbl-offices').innerHTML = html;
+  }
+
+  recalc();
+</script>
+
+</body>
+</html>
