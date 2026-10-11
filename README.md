@@ -12,11 +12,12 @@
 
 ## 📑 Quick Navigation & Core Deliverables
 
-- 📄 **[Full 12-Page Case Study Document (PDF)](docs/WorkInSync_TAM_Capacity_Planning_Case_Study.pdf)** — *Publication-grade executive report.*
-- 📖 **[Case Study Markdown Document](docs/CASE_STUDY.md)** — *Interactive online reading experience with Mermaid architecture diagrams.*
+- 📄 **[Executive 3-Page Analytical Memo (PDF)](docs/WorkInSync_TAM_Analytical_Solution_Ankur_Choudhary.pdf)** — *Concise, first-principles aptitude & problem-solving memo (Core Candidate Answer).*
+- 📄 **[Full Enterprise Implementation Blueprint (12-Page PDF)](docs/WorkInSync_TAM_Capacity_Planning_Case_Study.pdf)** — *In-depth workplace operations & technology rollout guide.*
+- 📖 **[Case Study Markdown Document](docs/CASE_STUDY.md)** — *Interactive online reading experience with architecture diagrams.*
 - 🌐 **[Live Capacity Simulator & KPI Dashboard](dashboard/index.html)** — *Browser-based interactive slider model.*
 - 📐 **[Capacity Simulation Engine](analytics_engine/capacity_simulation_engine.py)** — *Mathematical bounds, sharing ratios, and financial models.*
-- 📊 **[Facilities KPI Evaluator](kpi_suite/facilities_kpi_evaluator.py)** — *Automated 5-pillar Facilities Management Health Scorecard.*
+- 📊 **[Facilities KPI Evaluator](kpi_suite/facilities_kpi_evaluator.py)** — *Automated Facilities Management Health Scorecard.*
 - ⚙️ **[Weekly Automated Facilities Audit](automation/weekly_facilities_audit.py)** — *Automated weekly executive reporting script.*
 
 ---

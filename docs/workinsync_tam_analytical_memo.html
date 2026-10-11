@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WorkInSync TAM Assessment — Analytical Solution — Ankur Choudhary</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 16mm 18mm 16mm 18mm;
+    @bottom-right {
+      content: "Page " counter(page);
+      font-size: 8pt;
+      color: #64748b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+  }
+
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.45;
+    font-size: 9pt;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+  }
+
+  .header-block {
+    border-bottom: 2px solid #0284c7;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .title {
+    font-size: 16pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+  }
+  .subtitle {
+    font-size: 9.5pt;
+    color: #0284c7;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+  }
+  .meta-bar {
+    font-size: 8pt;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0369a1;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 3px;
+  }
+  h3 {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 8px;
+    margin-bottom: 3px;
+  }
+  p { margin: 0 0 6px 0; }
+
+  .callout {
+    background-color: #f8fafc;
+    border-left: 3.5px solid #0284c7;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 8px 0;
+    font-size: 8.5pt;
+  }
+
+  .math-box {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    font-size: 8.5pt;
+    margin: 6px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 8pt;
+  }
+  th {
+    background-color: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 5px 8px;
+  }
+  td {
+    padding: 4.5px 8px;
+    border: 1px solid #cbd5e1;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background-color: #f8fafc; }
+
+  ul, ol { margin: 3px 0 6px 16px; padding: 0; }
+  li { margin-bottom: 2.5px; }
+
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<div class="header-block">
+  <div class="title">WorkInSync Candidate Assessment — Analytical Solution</div>
+  <div class="subtitle">Multi-Country Workplace Capacity Sizing & Facilities Governance</div>
+  <div class="meta-bar">
+    <span><strong>Candidate:</strong> Ankur Choudhary</span>
+    <span><strong>Role:</strong> Technical Account Manager / Implementation Specialist</span>
+    <span><strong>Company:</strong> WorkInSync (by MoveInSync)</span>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>The Problem Statement:</strong><br>
+  <em>"You are a facility manager running 3 offices across 3 countries. A total of 2000 people need to be seated. Employees come in only 3 days a week. How many min-max seats are required? Present with reasoning. Also, what KPIs will you use to assess whether the Facilities Team is doing a good job?"</em>
+</div>
+
+<h2>1. Baseline Demand & Key Assumptions</h2>
+<p>
+To solve this analytically, I start from first principles by breaking down the total demand for desks:
+</p>
+<ul>
+  <li><strong>Total Headcount (N):</strong> 2,000 employees distributed across 3 offices in 3 countries.</li>
+  <li><strong>In-Office Policy (d):</strong> 3 days per week in-office (60% attendance per employee).</li>
+  <li><strong>Working Week (W):</strong> 5 standard operating business days (Monday through Friday).</li>
+  <li><strong>Total Weekly Desk Demand (D):</strong>
+    <div class="math-box">
+      D = 2,000 employees &times; 3 days/week = <strong>6,000 person-days of desk demand per week</strong>
+    </div>
+  </li>
+</ul>
+
+<h2>2. Seating Sizing: Minimum, Maximum & Recommended Range</h2>
+
+<h3>A. Theoretical Absolute Minimum: 1,200 Seats (60% Capacity / 1.67:1 Sharing Ratio)</h3>
+<div class="math-box">
+  S_min = Total Weekly Demand (6,000) &divide; Operating Days (5) = <strong>1,200 Seats</strong>
+</div>
+<ul>
+  <li><strong>Reasoning:</strong> If attendance is spread <em>perfectly evenly</em> across Monday to Friday, exactly 1,200 people arrive each day ($1,200 \times 5 = 6,000$). Every desk is shared by $2,000 / 1,200 \approx 1.67$ employees.</li>
+  <li><strong>Why this is theoretical:</strong> In real life, perfect uniform distribution is almost impossible. It assumes 100% schedule compliance, zero absenteeism, zero visitor arrivals, and that employees are equally willing to come on Mondays and Fridays as mid-week. Operating at exactly 1,200 seats leaves zero margin for error.</li>
+</ul>
+
+<h3>B. Theoretical Absolute Maximum: 2,000 Seats (100% Capacity / 1:1 Dedicated Desks)</h3>
+<div class="math-box">
+  S_max = Total Headcount = <strong>2,000 Seats</strong>
+</div>
+<ul>
+  <li><strong>Reasoning:</strong> If all 2,000 employees decide to show up on the same day (e.g., for a mandatory global town hall or all-hands), you would need 2,000 desks to avoid turning anyone away.</li>
+  <li><strong>Why this is wasteful:</strong> Since the policy only requires 3 days/week, on average only 1,200 people are in the office on any given day. Having 2,000 desks means <strong>800 desks (40% of the entire office) sit completely empty every day</strong>, burning unnecessary rent, electricity, and maintenance costs.</li>
+</ul>
+
+<h3>C. The Real-World Peak (Unmanaged Hybrid): ~1,700 Seats (85% Capacity / 1.18:1 Sharing Ratio)</h3>
+<ul>
+  <li><strong>Reasoning:</strong> When companies mandate "3 days a week" without cohort scheduling, employees naturally avoid Mondays and Fridays and cluster on Tuesday, Wednesday, and Thursday (the "TWaT" phenomenon). Peak attendance mid-week typically reaches <strong>80% to 85%</strong> of the company ($2,000 \times 0.85 = \mathbf{1,700\text{ seats}}$), leaving Mondays and Fridays underutilized.</li>
+</ul>
+
+<h3>D. The Recommended Practical Optimal: 1,380 Seats (69% Capacity / 1.45:1 Sharing Ratio)</h3>
+<div class="math-box">
+  S_optimal = S_min (1,200) &times; 1.15 (15% dynamic buffer) = <strong>1,380 Seats</strong>
+</div>
+<ul>
+  <li><strong>Reasoning:</strong> This is the operational "sweet spot". By implementing team-level cohorting (e.g., Tech teams in Tue/Wed/Thu; Sales/Operations in Mon/Wed/Fri) and adding a <strong>15% buffer (180 seats)</strong>, we absorb collaborative overlap, project war-rooms, and client visits. Peak utilization stays comfortably at <strong>81%–85%</strong> with zero booking denials, while eliminating <strong>620 redundant desks</strong> compared to a 1:1 setup.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>3. Sizing Summary Table</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">Model</th>
+      <th style="width: 12%;">Seats</th>
+      <th style="width: 14%;">Sharing Ratio</th>
+      <th style="width: 18%;">Desk Allocation</th>
+      <th style="width: 36%;">Practical Reality & Evaluation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. Theoretical Minimum</strong></td>
+      <td><strong>1,200</strong></td>
+      <td>1.67 : 1</td>
+      <td>60.0%</td>
+      <td><strong>The Floor:</strong> Perfect uniform cohorting. Zero buffer for overlap or visitors.</td>
+    </tr>
+    <tr>
+      <td><strong>2. Recommended Optimal</strong></td>
+      <td><strong>1,380</strong></td>
+      <td>1.45 : 1</td>
+      <td>69.0%</td>
+      <td><strong>The Sweet Spot:</strong> Balanced cohorts + 15% buffer. High efficiency, zero friction.</td>
+    </tr>
+    <tr>
+      <td><strong>3. Unmanaged Peak</strong></td>
+      <td><strong>1,700</strong></td>
+      <td>1.18 : 1</td>
+      <td>85.0%</td>
+      <td><strong>Organic Reality:</strong> Heavy mid-week clustering (Tue-Thu) without software control.</td>
+    </tr>
+    <tr>
+      <td><strong>4. Theoretical Maximum</strong></td>
+      <td><strong>2,000</strong></td>
+      <td>1.00 : 1</td>
+      <td>100.0%</td>
+      <td><strong>The Ceiling:</strong> 1:1 dedicated seating. Wastes 40% of real estate capital daily.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Managing Across 3 Offices & 3 Countries</h2>
+<p>
+The prompt specifically highlights running <strong>3 offices across 3 countries</strong>. Desk capacity cannot be shared across national borders. As a Facility Manager / TAM, here is how I break down the global reality:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 22%;">Office Location</th>
+      <th style="width: 16%;">Headcount Split</th>
+      <th style="width: 14%;">Min Seats (60%)</th>
+      <th style="width: 18%;">Optimal Seats (69%)</th>
+      <th style="width: 14%;">Max Seats (100%)</th>
+      <th style="width: 16%;">Typical Cost / Seat / Yr</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Office 1: India (Bangalore)</strong></td>
+      <td>1,000 (50%)</td>
+      <td>600</td>
+      <td><strong>690</strong></td>
+      <td>1,000</td>
+      <td>~$2,500 / desk</td>
+    </tr>
+    <tr>
+      <td><strong>Office 2: USA (New York)</strong></td>
+      <td>600 (30%)</td>
+      <td>360</td>
+      <td><strong>414</strong></td>
+      <td>600</td>
+      <td>~$8,500 / desk</td>
+    </tr>
+    <tr>
+      <td><strong>Office 3: UK (London)</strong></td>
+      <td>400 (20%)</td>
+      <td>240</td>
+      <td><strong>276</strong></td>
+      <td>400</td>
+      <td>~$7,200 / desk</td>
+    </tr>
+    <tr style="font-weight: bold; background: #f0fdf4;">
+      <td>Global Total</td>
+      <td>2,000 (100%)</td>
+      <td>1,200</td>
+      <td>1,380</td>
+      <td>2,000</td>
+      <td>$5,240 (Blended Avg)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Key Cross-Border Operational Factors:</h3>
+<ol>
+  <li><strong>Holiday Desynchronization:</strong> National holidays don't align (e.g., Thanksgiving in the US, Diwali in India, Spring Bank Holiday in the UK). Local office calendars must dynamically adjust available capacity without skewing global attendance tracking.</li>
+  <li><strong>Department Variations:</strong> Sales and executive offices (e.g., New York) travel more and tolerate a higher sharing ratio (e.g., 2:1), whereas technical engineering hubs (e.g., Bangalore) require specialized hardware and lower sharing ratios (e.g., 1.3:1).</li>
+  <li><strong>Financial Impact:</strong> Sizing the portfolio at 1,380 seats rather than 2,000 eliminates 620 redundant desks. At a blended commercial cost of ~$5,240/seat/year, this saves <strong>~$3.25 Million annually</strong> across the global lease portfolio.</li>
+</ol>
+
+<div class="page-break"></div>
+
+<h2>5. KPIs to Assess if the Facilities Team is Doing a Good Job</h2>
+<p>
+To evaluate whether the Facilities Team is managing the workplace effectively, I use a clear, 4-pillar scorecard balancing <strong>efficiency, employee experience, cost, and operations</strong>:
+</p>
+
+<h3>Pillar 1: Space Utilization & Efficiency (Are we optimizing real estate?)</h3>
+<ul>
+  <li><strong>1. Peak Seat Utilization Rate (Target: 75% – 85%):</strong>
+    <br><em>Calculation:</em> $(\text{Peak Occupied Desks at 11 AM} / \text{Total Available Desks}) \times 100$.
+    <br><em>Why it matters:</em> This is the "Goldilocks" metric. If it exceeds 90%, employees feel cramped and struggle to find seats. If it is below 65%, the company is paying for empty space.
+  </li>
+  <li><strong>2. Ghost Desk Rate (Target: &le; 5%):</strong>
+    <br><em>Calculation:</em> $(\text{Desks Booked but Unattended without Check-in} / \text{Total Booked Desks}) \times 100$.
+    <br><em>Why it matters:</em> High ghost booking creates artificial shortages where employees think the office is full when desks are physically empty.
+  </li>
+  <li><strong>3. Effective Desk Sharing Ratio (Target: 1.40:1 to 1.50:1):</strong>
+    <br><em>Calculation:</em> $\text{Total Headcount} / \text{Total Physical Desks}$ (Target: 1.45:1). Proves the efficiency of the hybrid model.
+  </li>
+</ul>
+
+<h3>Pillar 2: Employee Experience & Friction (Are employees satisfied and productive?)</h3>
+<ul>
+  <li><strong>4. Booking Denial / Bump Rate (Target: &le; 2%):</strong>
+    <br><em>Calculation:</em> $(\text{Failed Booking Attempts due to Zero Capacity} / \text{Total Booking Attempts}) \times 100$.
+    <br><em>Why it matters:</em> The single biggest policy risk. If an employee comes to the office on their mandated day and cannot find a desk, hybrid trust collapses.
+  </li>
+  <li><strong>5. Check-In Compliance Rate (Target: &ge; 90%):</strong>
+    <br><em>Calculation:</em> $(\text{Verified QR/Badge Check-ins} / \text{Total Reserved Desks}) \times 100$. Measures adoption of desk booking tools.
+  </li>
+  <li><strong>6. Workplace CSAT / Pulse Score (Target: &ge; 4.2 / 5.0):</strong>
+    <br>Regular employee feedback rating desk comfort, cleanliness, and ease of seating next to their team.
+  </li>
+</ul>
+
+<h3>Pillar 3: Financial & Environmental Efficiency (Are we saving money sustainably?)</h3>
+<ul>
+  <li><strong>7. Cost per Utilized Seat (Target: 20%–25% reduction vs pre-hybrid):</strong>
+    <br>Total annual real estate and facility operating cost divided by average daily attendees.
+  </li>
+  <li><strong>8. Energy / HVAC Consolidation Savings (Target: 15%–20% YoY):</strong>
+    <br>Measures whether facilities actively closes underutilized floors on quiet days (like Fridays) to save power and heating/cooling costs.
+  </li>
+</ul>
+
+<h3>Pillar 4: Operational Reliability & Safety (Is the facility well-run?)</h3>
+<ul>
+  <li><strong>9. Facilities Work Order SLA (Target: &ge; 95% resolved in &lt; 4 hours):</strong>
+    <br>Turnaround time when a monitor, docking station, chair, or Wi-Fi point at a hot-desk breaks.
+  </li>
+  <li><strong>10. Fire & Floor Safety Density Compliance (Target: 100% / 0 violations):</strong>
+    <br>Ensuring real-time live occupancy never exceeds legal fire code thresholds in any of the 3 countries.
+  </li>
+</ul>
+
+<div class="callout" style="margin-top: 15px;">
+  <strong>Summary of the Approach:</strong><br>
+  A good Facilities Team doesn't just count chairs—they balance <strong>operational capacity (1,380 seats)</strong> with <strong>employee experience (denial rate &lt;2%)</strong> and <strong>financial ROI ($3.25M savings)</strong>. By using smart scheduling and automated check-ins, the team can run a lean, cost-effective workplace without making employees feel cramped.
+</div>
+
+</body>
+</html>
