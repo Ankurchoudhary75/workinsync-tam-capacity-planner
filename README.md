@@ -39,10 +39,10 @@ Assuming a standard corporate 5-day operating week ($W = 5$ days, Monday–Frida
 
 ```mermaid
 graph LR
-    subgraph Capacity Bounds [2,000 Headcount @ 3 Days/Week]
-        Min[1,200 Seats<br>Theoretical Floor<br>Uniform 5-Day (1.67:1)] --> Opt[1,380 Seats<br>Recommended Optimal<br>WorkInSync + 15% Buffer]
-        Opt --> Peak[1,700 Seats<br>Unmanaged Peak<br>TWaT Clustering 85%]
-        Peak --> Max[2,000 Seats<br>Theoretical Ceiling<br>1:1 Dedicated Desks]
+    subgraph SGBounds ["Capacity Sizing Spectrum: 2,000 Headcount @ 3 Days/Week"]
+        Min["1,200 Seats<br>Theoretical Floor<br>Uniform 5-Day (1.67:1)"] --> Opt["1,380 Seats<br>Recommended Optimal<br>WorkInSync + 15% Buffer"]
+        Opt --> Peak["1,700 Seats<br>Unmanaged Peak<br>TWaT Clustering (85%)"]
+        Peak --> Max["2,000 Seats<br>Theoretical Ceiling<br>1:1 Dedicated Desks"]
     end
     style Min fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
     style Opt fill:#dcfce7,stroke:#16a34a,stroke-width:3px
@@ -81,18 +81,18 @@ Commercial real estate costs vary widely across international markets. Below is 
 
 ```mermaid
 graph TD
-    FM[Enterprise Facilities Health Scorecard]
-    FM --> P1[Pillar 1: Space & Capacity Utilization]
-    FM --> P2[Pillar 2: Employee Experience & Friction]
-    FM --> P3[Pillar 3: Financial & Energy Optimization]
-    FM --> P4[Pillar 4: Operational & Tech Uptime]
-    FM --> P5[Pillar 5: Safety & Regulatory Compliance]
+    FM["Enterprise Facilities Health Scorecard"]
+    FM --> P1["Pillar 1: Space & Capacity Utilization"]
+    FM --> P2["Pillar 2: Employee Experience & Friction"]
+    FM --> P3["Pillar 3: Financial & Energy Optimization"]
+    FM --> P4["Pillar 4: Operational & Tech Uptime"]
+    FM --> P5["Pillar 5: Safety & Regulatory Compliance"]
 
-    P1 --> K1[Peak Occupancy: 75%-85%<br>Ghost Desk Rate: ≤5%]
-    P2 --> K2[Booking Denial Rate: ≤2%<br>Check-In Compliance: ≥92%]
-    P3 --> K3[OPEX Savings: ≥30%<br>Cost/Utilized Seat: -25%]
-    P4 --> K4[Reverse Ghosting Recovery: ≥80%<br>Work Order SLA <4h: ≥95%]
-    P5 --> K5[Fire Code Incidents: 0<br>Live Evacuation Accuracy: ≥99.5%]
+    P1 --> K1["Peak Occupancy: 75% to 85%<br>Ghost Desk Rate: &le; 5%"]
+    P2 --> K2["Booking Denial Rate: &le; 2%<br>Check-In Compliance: &ge; 92%"]
+    P3 --> K3["OPEX Savings: &ge; 30%<br>Cost/Utilized Seat: -25%"]
+    P4 --> K4["Reverse Ghosting Recovery: &ge; 80%<br>Work Order SLA under 4h: &ge; 95%"]
+    P5 --> K5["Fire Code Incidents: 0<br>Live Evacuation Accuracy: &ge; 99.5%"]
 ```
 
 ### 1. Space & Capacity Utilization
